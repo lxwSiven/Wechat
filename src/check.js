@@ -43,10 +43,10 @@ module.exports = function(opts){
 				req.on('end', function(){
 					console.log(postData);
 					try{
-						xml2js.parseString(postData,{trim:true},function(err,content){
+						// xml2js.parseString(postData,{trim:true},function(err,content){
 						// console.log(util.parseXMLAsync(postData));
-						// util.parseXMLAsync(postData)
-						// 	.then(function(content){
+						util.parseXMLAsync(postData)
+							.then(function(content){
 								var message = util.formatMessage(content.xml);
 								console.log(message);
 								var now = new Date().getTime();
