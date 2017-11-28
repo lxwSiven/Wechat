@@ -39,6 +39,7 @@ function Wechat(opts){
 		})
 }
 
+//判断access_token是否有效
 Wechat.prototype.isValidAccessToken = function (data){
 	if (!data.access_token || !data.expires_in ){
 		return false;
@@ -52,18 +53,13 @@ Wechat.prototype.isValidAccessToken = function (data){
 	}
 }
 
+//更新access_token
 Wechat.prototype.updateAccessToken = function(){
 	var appId = this.appId;
 	var appSecret = this.appSecret;
 	var url = api.accessToken + '&appid=' + appId + '&secret=' + appSecret;
 	return new Promise(function(resolve, reject){
-		// var options={
-		// 	hostname:'api.weixin.qq.com',
-		// 	path:'/cgi-bin/token?grant_type=client_credential&appid='+appId+'&secret='+appSecret,
-		// 	method:'GET',
-		// 	json: true
-		// };
-		https.get(url, function(res){
+		https.get(url, function(res){	//请求access_token;
 			var data = '';
 			res.on('data', function(chunk){
 				data += chunk;
